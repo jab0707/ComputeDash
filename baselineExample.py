@@ -56,13 +56,13 @@ def execute_remote_script(ssh_client, remote_script_path,args=None):
 
 	try:
 		# Command to execute the remote script
-		command = f"python3 {remote_script_path}"
+		command = f"python3 {remote_script_path} {' '.join(args)}"
 		stdin, stdout, stderr = ssh_client.exec_command(command)
 
 		# Read the output
 		output = stdout.read().decode()
 		error = stderr.read().decode()
-
+		print(f'output from command execution\n{output}')
 		if error:
 			print(f"Error occurred: {error}")
 		return output
@@ -77,11 +77,15 @@ if __name__ == "__main__":
 		ssh_client = establish_ssh(node['HOSTNAME'],config['SSH_INFO']['USERNAME'],config['SSH_INFO']['KEY_PATH'])
 		if ssh_client is None:
 			continue
-		output = execute_remote_script(ssh_client,node['BASE_PATH'] + node['SCRIP_PATH'],[node['LOG_FILE']])
+		script = node['BASE_PATH'] + node['SCRIP_PATH']
+		remoteFile,localFile = format_file_names(node)
+		args = [node['INTERP_PATH'],remoteFile]
+		output = execute_remote_script(ssh_client,script,args)
 		if output is None:
+			ssh_client.close()
 			continue
 
-		remoteFile,localFile = format_file_names(node)
+		
 
 		fetch_remote_file(ssh_client, remoteFile, localFile)
 

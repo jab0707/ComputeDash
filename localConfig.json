@@ -6,6 +6,7 @@
 "NODES":[
 	{
 	"HOSTNAME":"wall-e.sci.utah.edu",
+	"INTERP_PATH":"/uu/sci.utah.edu/projects/CEG/Tools/pythonEnvs/systemMonitor/bin/python",
 	"LABEL":"wall-e",
 	"BASE_PATH":"/uu/sci.utah.edu/projects/CEG/Tools/ComputeDash/",
 	"LOG_PATH":"logs/",
@@ -14,6 +15,7 @@
 	},
 	{
 	"HOSTNAME":"cibcgpu4.sci.utah.edu",
+	"INTERP_PATH":"/uu/sci.utah.edu/projects/CEG/Tools/pythonEnvs/systemMonitor/bin/python",
 	"LABEL":"cibcgpu4",
 	"BASE_PATH":"/uu/sci.utah.edu/projects/CEG/Tools/ComputeDash/",
 	"LOG_PATH":"logs/",
@@ -22,6 +24,7 @@
 	},
 	{
 	"HOSTNAME":"zagreus.sci.utah.edu",
+	"INTERP_PATH":"/uu/sci.utah.edu/projects/CEG/Tools/pythonEnvs/systemMonitor/bin/python",
 	"LABEL":"zagreus",
 	"BASE_PATH":"/uu/sci.utah.edu/projects/CEG/Tools/ComputeDash/",
 	"LOG_PATH":"logs/",

@@ -1,23 +1,18 @@
-import yaml, subprocess, sys, os
+import subprocess, sys, os
 
 
 
 
 # Read the interpreter path from settings.yaml
-def pullConfig():
-    with open('remoteConfig.yaml', 'r') as f:
-        config = yaml.safe_load(f)
-    return config
+
 
 if __name__=="__main__":
-    config = pullConfig()
-    interpreter = config['VENV_INTERPRETER']
 
-    if not os.isdir(config['STATS_DIR']):
-        os.mkdir(config['STATS_DIR'])
-    args = [config['DEFAULT_STATS_FILE']]
-    if len(sys.argv>1):
-        args = sys.argv[1:]
+    if len(sys.argv!=3):
+        print("That didn't work")
+        return
+    interpreter=sys.argv[1]
+    args = sys.argv[2:]
     # Pass all arguments to the main script
     command = [interpreter, 'remote_script.py', *args]
     print(f'Attmepting to run like so:\n{' '.join(command)} ')
