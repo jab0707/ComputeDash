@@ -74,6 +74,7 @@ if __name__ == "__main__":
 		config = json.load(f)
 
 	for node in config['NODES']:
+		print(f'Running usage diagnostics on {node["LABEL"]}')
 		ssh_client = establish_ssh(node['HOSTNAME'],config['SSH_INFO']['USERNAME'],config['SSH_INFO']['KEY_PATH'])
 		if ssh_client is None:
 			continue
@@ -90,9 +91,7 @@ if __name__ == "__main__":
 		fetch_remote_file(ssh_client, remoteFile, localFile)
 
 		print_results(node,localFile)
+		print(f'Done with {node["LABEL"]}')
 
 
 	
-	# Execute the remote script
-	output = execute_remote_script(host, username, key_path, remote_script_path)
-	print(f"Remote Script Output:\n{output}")
