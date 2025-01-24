@@ -1,0 +1,32 @@
+{
+"SSH_INFO":{
+	"USERNAME":"jbergquist",
+	"KEY_PATH":"/"
+},
+"NODES":[
+	{
+	"HOSTNAME":"wall-e.sci.utah.edu",
+	"LABEL":"wall-e",
+	"BASE_PATH":"/uu/sci.utah.edu/projects/CEG/Tools/ComputeDash/",
+	"LOG_PATH":"logs/",
+	"SCRIP_PATH":"remote_wrapper.py",
+	"LOG_FILE":"wall-e.stats"
+	},
+	{
+	"HOSTNAME":"cibcgpu4.sci.utah.edu",
+	"LABEL":"cibcgpu4",
+	"BASE_PATH":"/uu/sci.utah.edu/projects/CEG/Tools/ComputeDash/",
+	"LOG_PATH":"logs/",
+	"SCRIP_PATH":"remote_wrapper.py",
+	"LOG_FILE":"cibcgpu4.stats"
+	},
+	{
+	"HOSTNAME":"zagreus.sci.utah.edu",
+	"LABEL":"zagreus",
+	"BASE_PATH":"/uu/sci.utah.edu/projects/CEG/Tools/ComputeDash/",
+	"LOG_PATH":"logs/",
+	"SCRIP_PATH":"remote_wrapper.py",
+	"LOG_FILE":"zagreus.stats"
+	}
+]
+}
