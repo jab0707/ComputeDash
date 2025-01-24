@@ -39,11 +39,11 @@ def format_file_names(node):
 def print_results(node,localFile):
 	with open('localFile') as f:
 		stats = json.load(f)
-	print(f'Node : {node['LABEL']}:')
-	print(f'\tCPU   : {stats['cpu']}')
-	print(f'\tMEMORY: {stats['memory']}')
-	print(f'\tDISK  : {stats['disk']}')
-	print(f'\tGPU   : {stats['gpu']}')
+	print(f"Node : {node['LABEL']}:")
+	print(f"\tCPU   : {stats['cpu']}")
+	print(f"\tMEMORY: {stats['memory']}")
+	print(f"\tDISK  : {stats['disk']}")
+	print(f"\tGPU   : {stats['gpu']}")
 
 def execute_remote_script(ssh_client, remote_script_path,args=None):
 	"""
@@ -82,7 +82,7 @@ if __name__ == "__main__":
 			continue
 
 		remoteFile,localFile = format_file_names(node)
-		
+
 		fetch_remote_file(ssh_client, remoteFile, localFile)
 
 		print_results(node,localFile)

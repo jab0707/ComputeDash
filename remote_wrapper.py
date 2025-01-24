@@ -19,4 +19,6 @@ if __name__=="__main__":
     if len(sys.argv>1):
         args = sys.argv[1:]
     # Pass all arguments to the main script
-    subprocess.run([interpreter, 'remote_script.py', *args])
+    command = [interpreter, 'remote_script.py', *args]
+    print(f'Attmepting to run like so:\n{' '.join(command)} ')
+    subprocess.run(command)
