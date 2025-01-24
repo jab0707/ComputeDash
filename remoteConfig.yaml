@@ -1,3 +1,0 @@
-VENV_INTERPRETER: /uu/sci.utah.edu/projects/CEG/Tools/pythonEnvs/systemMonitor/bin/python
-STATS_DIR: ./logs/
-DEFAULT_STATS_FILE: compute.stats
