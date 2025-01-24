@@ -79,7 +79,7 @@ if __name__ == "__main__":
 			continue
 		script = node['BASE_PATH'] + node['SCRIP_PATH']
 		remoteFile,localFile = format_file_names(node)
-		args = [node['INTERP_PATH'],remoteFile]
+		args = [node['INTERP_PATH'],node['BASE_PATH'],remoteFile]
 		output = execute_remote_script(ssh_client,script,args)
 		if output is None:
 			ssh_client.close()
