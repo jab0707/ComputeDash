@@ -8,7 +8,7 @@ import subprocess, sys, os
 
 if __name__=="__main__":
 
-	if len(sys.argv!=3):
+	if len(sys.argv)!=3:
 		print("That didn't work")
 		sys.exit(1)
 	interpreter=sys.argv[1]
