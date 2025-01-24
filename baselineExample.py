@@ -40,11 +40,12 @@ def print_results(node,localFile):
 	with open(localFile) as f:
 		stats = json.load(f)
 	print(f"Node : {node['LABEL']}:")
-	print(f"\tCPU   : {stats['cpu']}")
-	print(f"\tMEMORY: {stats['memory']}")
-	print(f"\tDISK  : {stats['disk']}")
-	print(f"\tGPU   : {stats['gpu']}")
-
+	print(f"\tCPU   : {stats['cpu']}% loaded")
+	print(f"\tMEMORY: {stats['memory']}% loaded")
+	print(f"\tDISK  : {stats['disk']}% loaded")
+	gpuInfo = ''.join([f"GPU:{g['id']} : {g['load']}% loaded\n\t        " for g in stats['gpu']])
+	print(f"\tGPU   : {gpuInfo}")
+	print('\n')
 def execute_remote_script(ssh_client, remote_script_path,args=None):
 	"""
 	Executes a remote script via SSH.
