@@ -1,7 +1,7 @@
 {
 "SSH_INFO":{
 	"USERNAME":"jbergquist",
-	"KEY_PATH":"/"
+	"KEY_PATH":"C:/Users/jake/.ssh/sci_compute"
 },
 "NODES":[
 	{
