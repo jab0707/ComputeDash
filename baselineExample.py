@@ -37,7 +37,7 @@ def format_file_names(node):
 
 
 def print_results(node,localFile):
-	with open('localFile') as f:
+	with open(localFile) as f:
 		stats = json.load(f)
 	print(f"Node : {node['LABEL']}:")
 	print(f"\tCPU   : {stats['cpu']}")

@@ -1,4 +1,4 @@
-import json, psutil, GPUtil, time, pathlib
+import json, psutil, GPUtil, time, pathlib,sys
 
 
 def scrape_data():
