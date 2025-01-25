@@ -6,7 +6,7 @@ first download this repo both locally and in a centralized location accessible t
 
 next, confgure the localConfig.json (you can store this outside of the repo and point at it later)
 Params are:
-
+```json
 {
 "SSH_INFO":{ #Info about your ssh identity
 	"USERNAME":<ssh log in username>,
@@ -25,9 +25,19 @@ Params are:
 	"LOG_FILE":<name of log file for this node>
 	}
 }
-
+```
 the INTERP_PATH is a path to a python interpreter which has the following packaged:
 json, psutil, GPUtil, setuptools
 (requirements.txt file to follow)
 I usue a virtual environment for this, but it can also be the default if those packages are installed globally. But I doubt that is the case across all machines soo.....
+
+
+locally the maching calling things will need a python env with the following packages:
+paramiko
+
+Then just run the baselineExample like so:
+python3 baselineExample.py --jumphost --configLoc <path/to/config.json> --verbocity 1 --nodes "all"
+
+
+
 
