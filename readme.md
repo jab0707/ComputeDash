@@ -8,21 +8,21 @@ next, confgure the localConfig.json (you can store this outside of the repo and 
 Params are:
 ```json
 {
-"SSH_INFO":{ #Info about your ssh identity
-	"USERNAME":<ssh log in username>,
-	"KEY_PATH":<path to a ssh private key>,
-	"JUMP_HOST":<jump host (if needed)>,
-	"JUMP_PORT":<jump port (if needed)>
+"SSH_INFO":{ //Info about your ssh identity
+	"USERNAME":"<ssh log in username>",
+	"KEY_PATH":"<path/to/a/ssh/private/key>",
+	"JUMP_HOST":"<jump host (if needed)>",
+	"JUMP_PORT":"<jump port (if needed)>"
 },
 "NODES":{
-	<name of compute node>:{
-	"HOSTNAME":<host.name.of.node>,
-	"INTERP_PATH":<path/to/python/venv/interpreter>,
-	"LABEL":<a label>,
-	"BASE_PATH":<path to this repo locally on this machine>,
-	"LOG_PATH":<path where logs should be written, referenced to BASE_PATH>,
-	"SCRIP_PATH":"remote_wrapper.py",#this is probably the script you want
-	"LOG_FILE":<name of log file for this node>
+	"<name of compute node>":{
+	"HOSTNAME":"<host.name.of.node>",
+	"INTERP_PATH":"<path/to/python/venv/interpreter>",
+	"LABEL":"<a label>",
+	"BASE_PATH":"<path/to/this/repo/locally/on/this/machine/>",
+	"LOG_PATH":"<path/where/logs/should/be/written/referenced/to/BASE_PATH/>",
+	"SCRIP_PATH":"remote_wrapper.py",//this is probably the script you want
+	"LOG_FILE":"<name of log file for this node>"
 	}
 }
 ```
