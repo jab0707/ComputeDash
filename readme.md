@@ -36,8 +36,17 @@ locally the maching calling things will need a python env with the following pac
 paramiko
 
 Then just run the baselineExample like so:
+```bash
 python3 baselineExample.py --jumphost --configLoc <path/to/config.json> --verbocity 1 --nodes "all"
+```
 
+### TODO:
+- Add more metrics
+- Set up periodic logging
+- Set up updating visualization of logs (flask?)
+- Other stuff
+- Better error handling/exception detials
+- Documentation I guess
 
 
 
