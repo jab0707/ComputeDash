@@ -43,8 +43,8 @@ if __name__ == "__main__":
 
 	for nodeName in nodesToRun:
 		nodeDict = config['NODES'][nodeName]
-		node = computeNodeMonitor.node.fromNodeDict(nodeDict)
-		node.setupConfig(config['SSH_INFO'])
+		node = computeNodeMonitor.node(nodeDict)
+		node.setupConfig(config['SSH_INFO'],config['LOCAL_INFO'])
 		node.useJumphost = args.jumphost
 		gu.infoDump(f'\n=====Running usage diagnostics on {node.label}=====',0)
 		

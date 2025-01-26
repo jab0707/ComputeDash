@@ -19,41 +19,47 @@ def check_for_config(func):
 	return wrapper
 
 class node:
-	def __init__(self,label='',hostname='',loadCheckScript='',localLogFile='',remoteLogFile='',useJumphost=False):
+	def __init__(self,attributes,useJumphost=False):
 		self.socket = None
 		self.jump_client = None
 		self.ssh_client = None
 
+		#config info, set my self.setupConfig
+		#ssh info
 		self.jumphost = None
 		self.username = None
 		self.keypath = None
 		self.jumpport = None
+		#log path info
+		self.localLogFile=None
+		self.remoteLogFile=None
 
-		self.loadCheckScript=loadCheckScript
-		self.localLogFile=localLogFile
-		self.remoteLogFile=remoteLogFile
-		self.useJumphost=useJumphost
-		self.label = label
-		self.hostname=hostname
+		for key in attributes.keys():
+			setattr(self,key,attributes[key])
 
 		self._isConfiged =False
 
-	@classmethod
-	def fromNodeDict(cls,nodeDict):
-		script = nodeDict['BASE_PATH'] + nodeDict['SCRIP_PATH']
-		remoteFile,localFile = format_file_names(nodeDict)
-		scrip_args = [nodeDict['INTERP_PATH'],nodeDict['BASE_PATH'],remoteFile]
+
+
+	def setupConfig(self,sshConfig,localConfig):
+		#ssh info
+		self.jumphost = sshConfig['JUMP_HOST']
+		self.username = sshConfig['USERNAME']
+		self.keypath = sshConfig['KEY_PATH']
+		self.jumpport = sshConfig['JUMP_PORT']
+
+		#log file locations
+		self.localLogFile = localConfig['BASE_PATH'] + localConfig['LOG_PATH'] + self.LOG_FILE
+		self.remoteLogFile = self.BASE_PATH + self.LOG_PATH + self.LOG_FILE
+		
+		#remote script location and arguments
+		script = self.'BASE_PATH' + self.'SCRIP_PATH'
+		scrip_args = [self.'INTERP_PATH',self.'BASE_PATH',self.remoteLogFile]
 		loadCheckScript = [script]
 		loadCheckScript.extend(scrip_args)
-		label = nodeDict['LABEL']
-		hostname = nodeDict['HOSTNAME']
-		return cls(label,hostname,loadCheckScript,localFile,remoteFile)
+		self.loadCheckScript = loadCheckScript
 
-	def setupConfig(self,config):
-		self.jumphost = config['JUMP_HOST']
-		self.username = config['USERNAME']
-		self.keypath = config['KEY_PATH']
-		self.jumpport = config['JUMP_PORT']
+
 		self._isConfiged = True
 		gu.infoDump('Config set',1)
 
@@ -104,7 +110,7 @@ class node:
 			with open(self.localLogFile) as f:
 				stats = json.load(f)
 			priority=0
-			gu.infoDump(f"Node : {self.label}:",priority)
+			gu.infoDump(f"Node : {self.LABEL}:",priority)
 			gu.infoDump(f"\tCPU   : {stats['cpu']}% loaded",priority)
 			gu.infoDump(f"\tMEMORY: {stats['memory']}% loaded",priority)
 			gu.infoDump(f"\tDISK  : {stats['disk']}% loaded",priority)
