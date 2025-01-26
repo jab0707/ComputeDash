@@ -1,8 +1,7 @@
-import general_utils as gu
+import ComputeDash.utils.general_utils as gu
+import ComputeDash.utils.globalParams as gp
+
 import paramiko
-import globalParams as gp
-
-
 
 
 def establish_ssh(host, username, key_path,port=22,socket=None):

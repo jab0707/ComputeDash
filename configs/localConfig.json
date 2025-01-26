@@ -6,26 +6,26 @@
 	"JUMP_PORT":"5522"
 },
 "LOCAL_INFO":{
-	"BASE_PATH":"../",//one folder up from the calling script is theoretically the base path
-	"LOG_PATH":"remoteQuery/logs/"
+	"BASE_PATH":"../",
+	"LOG_PATH":"../logs/"
 },
 "NODES":{
 	"wall-e":{
 	"HOSTNAME":"wall-e.sci.utah.edu",
 	"INTERP_PATH":"/uu/sci.utah.edu/projects/CEG/Tools/pythonEnvs/systemMonitor/bin/python",
 	"LABEL":"wall-e",
-	"BASE_PATH":"/uu/sci.utah.edu/projects/CEG/Tools/ComputeDash/",
-	"LOG_PATH":"remoteQuery/logs/",
-	"SCRIP_PATH":"remote_wrapper.py",
+	"BASE_PATH":"/uu/sci.utah.edu/projects/CEG/Tools/ComputeDash/ComputeDash/",
+	"LOG_PATH":"../logs/",
+	"SCRIP_PATH":"remoteQuery/remote_wrapper.py",
 	"LOG_FILE":"wall-e.stats"
 	},
 	"cibcgpu1":{
 	"HOSTNAME":"cibcgpu1.sci.utah.edu",
 	"INTERP_PATH":"/uu/sci.utah.edu/projects/CEG/Tools/pythonEnvs/systemMonitor/bin/python",
 	"LABEL":"cibcgpu1",
-	"BASE_PATH":"/uu/sci.utah.edu/projects/CEG/Tools/ComputeDash/",
-	"LOG_PATH":"remoteQuery/logs/",
-	"SCRIP_PATH":"remote_wrapper.py",
+	"BASE_PATH":"/uu/sci.utah.edu/projects/CEG/Tools/ComputeDash/ComputeDash/",
+	"LOG_PATH":"../logs/",
+	"SCRIP_PATH":"remoteQuery/remote_wrapper.py",
 	"LOG_FILE":"cibcgpu1.stats"
 	},
 	"cibcgpu2":{
@@ -34,7 +34,7 @@
 	"LABEL":"cibcgpu2",
 	"BASE_PATH":"/uu/sci.utah.edu/projects/CEG/Tools/ComputeDash/",
 	"LOG_PATH":"remoteQuery/logs/",
-	"SCRIP_PATH":"remote_wrapper.py",
+	"SCRIP_PATH":"remoteQuery/remote_wrapper.py",
 	"LOG_FILE":"cibcgpu2.stats"
 	},
 	"cibcgpu3":{
@@ -43,7 +43,7 @@
 	"LABEL":"cibcgpu3",
 	"BASE_PATH":"/uu/sci.utah.edu/projects/CEG/Tools/ComputeDash/",
 	"LOG_PATH":"remoteQuery/logs/",
-	"SCRIP_PATH":"remote_wrapper.py",
+	"SCRIP_PATH":"remoteQuery/remote_wrapper.py",
 	"LOG_FILE":"cibcgpu3.stats"
 	},
 	"cibcgpu4":{
@@ -52,7 +52,7 @@
 	"LABEL":"cibcgpu4",
 	"BASE_PATH":"/uu/sci.utah.edu/projects/CEG/Tools/ComputeDash/",
 	"LOG_PATH":"remoteQuery/logs/",
-	"SCRIP_PATH":"remote_wrapper.py",
+	"SCRIP_PATH":"remoteQuery/remote_wrapper.py",
 	"LOG_FILE":"cibcgpu4.stats"
 	},
 	"zagreus":{
@@ -61,7 +61,7 @@
 	"LABEL":"zagreus",
 	"BASE_PATH":"/uu/sci.utah.edu/projects/CEG/Tools/ComputeDash/",
 	"LOG_PATH":"remoteQuery/logs/",
-	"SCRIP_PATH":"remote_wrapper.py",
+	"SCRIP_PATH":"remoteQuery/remote_wrapper.py",
 	"LOG_FILE":"zagreus.stats"
 	},
 	"cibcsm1":{
@@ -70,7 +70,7 @@
 	"LABEL":"cibcsm1",
 	"BASE_PATH":"/uu/sci.utah.edu/projects/CEG/Tools/ComputeDash/",
 	"LOG_PATH":"remoteQuery/logs/",
-	"SCRIP_PATH":"remote_wrapper.py",
+	"SCRIP_PATH":"remoteQuery/remote_wrapper.py",
 	"LOG_FILE":"cibcsm1.stats"
 	},
 	"cibcsm2":{
@@ -79,7 +79,7 @@
 	"LABEL":"cibcsm2",
 	"BASE_PATH":"/uu/sci.utah.edu/projects/CEG/Tools/ComputeDash/",
 	"LOG_PATH":"remoteQuery/logs/",
-	"SCRIP_PATH":"remote_wrapper.py",
+	"SCRIP_PATH":"remoteQuery/remote_wrapper.py",
 	"LOG_FILE":"cibcsm2.stats"
 	},
 	"cibcsm3":{
@@ -88,7 +88,7 @@
 	"LABEL":"cibcsm3",
 	"BASE_PATH":"/uu/sci.utah.edu/projects/CEG/Tools/ComputeDash/",
 	"LOG_PATH":"remoteQuery/logs/",
-	"SCRIP_PATH":"remote_wrapper.py",
+	"SCRIP_PATH":"remoteQuery/remote_wrapper.py",
 	"LOG_FILE":"cibcsm3.stats"
 	},
 	"cibcsm4":{
@@ -97,7 +97,7 @@
 	"LABEL":"cibcsm4",
 	"BASE_PATH":"/uu/sci.utah.edu/projects/CEG/Tools/ComputeDash/",
 	"LOG_PATH":"remoteQuery/logs/",
-	"SCRIP_PATH":"remote_wrapper.py",
+	"SCRIP_PATH":"remoteQuery/remote_wrapper.py",
 	"LOG_FILE":"cibcsm4.stats"
 	}
 }

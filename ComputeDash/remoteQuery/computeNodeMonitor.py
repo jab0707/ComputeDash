@@ -1,13 +1,8 @@
 
-import globalParams as gp
-import general_utils as gu
-import ssh_utils as shu
-import json
-
-def format_file_names(nodeDict):
-	remoteFile = nodeDict['BASE_PATH'] + nodeDict['LOG_PATH'] + nodeDict['LOG_FILE']
-	localFile = './'+nodeDict['LOG_PATH']+nodeDict['LOG_FILE']
-	return remoteFile,localFile
+import ComputeDash.utils.globalParams as gp
+import ComputeDash.utils.general_utils as gu
+import ComputeDash.utils.ssh_utils as shu
+import json,os
 
 def check_for_config(func):
 	def wrapper(self, *args, **kwargs):
@@ -53,8 +48,9 @@ class node:
 		self.remoteLogFile = self.BASE_PATH + self.LOG_PATH + self.LOG_FILE
 		
 		#remote script location and arguments
-		script = self.'BASE_PATH' + self.'SCRIP_PATH'
-		scrip_args = [self.'INTERP_PATH',self.'BASE_PATH',self.remoteLogFile]
+		script = self.BASE_PATH + self.SCRIP_PATH
+		scriptDir = os.path.dirname(script) + '/'
+		scrip_args = [self.INTERP_PATH,scriptDir,self.remoteLogFile]
 		loadCheckScript = [script]
 		loadCheckScript.extend(scrip_args)
 		self.loadCheckScript = loadCheckScript
@@ -91,11 +87,11 @@ class node:
 					return 1
 
 				jump_transport = self.jump_client.get_transport()
-				destination_addr = (self.hostname, 22)
+				destination_addr = (self.HOSTNAME, 22)
 				local_addr = ('127.0.0.1', 0)
 				self.socket = jump_transport.open_channel("direct-tcpip", destination_addr, local_addr)
 
-			self.ssh_client = shu.establish_ssh(self.hostname,
+			self.ssh_client = shu.establish_ssh(self.HOSTNAME,
 												self.username,
 												self.keypath,
 												socket=self.socket)
@@ -115,8 +111,8 @@ class node:
 			gu.infoDump(f"\tMEMORY: {stats['memory']}% loaded",priority)
 			gu.infoDump(f"\tDISK  : {stats['disk']}% loaded",priority)
 			gpuInfo = ''.join([f"GPU:{g['id']} : {g['load']}% loaded\n\t        " for g in stats['gpu']])
-			gu.infoDump(f"\tGPU   : {gpuInfo}",priority)
-			gu.infoDump('\n',priority)
+			if len(gpuInfo)>1:
+				gu.infoDump(f"\tGPU   : {gpuInfo}",priority)
 		except:
 			return 1
 		return 0

@@ -1,8 +1,7 @@
 import json,os,sys,argparse
-import general_utils as gu
-import ssh_utils as shu
-import globalParams
-import computeNodeMonitor
+import ComputeDash.utils.general_utils as gu
+import ComputeDash.utils.globalParams
+import ComputeDash.remoteQuery.computeNodeMonitor as computeNodeMonitor
 
 globalParams.ERROR_VERBOCITY=-1#give errors high priority during testing
 #This would effectivly suppress errors: globalParams.ERROR_VERBOCITY=100000
@@ -46,7 +45,7 @@ if __name__ == "__main__":
 		node = computeNodeMonitor.node(nodeDict)
 		node.setupConfig(config['SSH_INFO'],config['LOCAL_INFO'])
 		node.useJumphost = args.jumphost
-		gu.infoDump(f'\n=====Running usage diagnostics on {node.label}=====',0)
+		gu.infoDump(f'\n=====Running usage diagnostics on {node.LABEL}=====',0)
 		
 		if node.establish_connection() != 0:
 			gu.infoDump('Failed during connection',globalParams.ERROR_VERBOCITY)
@@ -63,7 +62,7 @@ if __name__ == "__main__":
 		node.close_connection()
 
 
-		gu.infoDump(f'Done with {node.label}\n',0)
+		gu.infoDump(f'Done with {node.LABEL}\n',0)
 
 
 	
