@@ -1,6 +1,6 @@
 import json,os,sys,argparse
 import ComputeDash.utils.general_utils as gu
-import ComputeDash.utils.globalParams
+import ComputeDash.utils.globalParams as globalParams
 import ComputeDash.remoteQuery.computeNodeMonitor as computeNodeMonitor
 
 globalParams.ERROR_VERBOCITY=-1#give errors high priority during testing
@@ -10,7 +10,7 @@ def mainParser():
 	parser = argparse.ArgumentParser(add_help=False)
 	# add arguments that we may want to change from one simulation to another
 	parser.add_argument("--jumphost", action='store_true', help="")
-	parser.add_argument("--configLoc",default='./localConfig.json',help="Config.json location")
+	parser.add_argument("--configLoc",default='../../configs/localConfig.json',help="Config.json location")
 	parser.add_argument("--nodes",default='all',help='Which nodes to run on')
 	parser.add_argument("--verbocity",type=int,default=1,help='Level of verbocity. Higher the level, the more detailed messages. Scale from 0 (no message) to like 4 or something.')
 
