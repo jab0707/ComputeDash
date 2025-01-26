@@ -1,4 +1,5 @@
 import ComputeDash.utils.globalParams as gp
+import json
 
 def readLogFile(logFile):
 	with open(logFile) as f:
