@@ -12,15 +12,6 @@ def mainParser():
 	return parser
 
 
-def scrape_data():
-	stats = {
-		"cpu":psutil.cpu_percent(interval=1),
-		"memory": psutil.virtual_memory().percent,
-        "disk": psutil.disk_usage('/').percent,
-        "gpu": [{"id": gpu.id, "load": gpu.load * 100} for gpu in GPUtil.getGPUs()],
-        "time":time.time()
-	}
-	return stats
 
 
 if __name__ == "__main__":
@@ -29,7 +20,7 @@ if __name__ == "__main__":
 	gp.VERBOCITY = args.verbocity
 	repeate_num = 0
 	while repeate_num < args.repeate_times:
-		current_stats = scrape_data()
+		current_stats = gu.scrape_data()
 		gu.updateLogFile(args.log_file,current_stats)
 		gu.infoDump(f'Waiting for {args.wait_delay} sec',1)
 		time.sleep(args.wait_delay)

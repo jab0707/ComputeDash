@@ -1,6 +1,16 @@
 import ComputeDash.utils.globalParams as gp
-import json, os
+import json, os, psutil, GPUtil, time,sys,datetime
 import numpy as np
+
+def scrape_data():
+	stats = {
+		"cpu":[psutil.cpu_percent(interval=1)],
+		"memory": [psutil.virtual_memory().percent],
+        "disk": [psutil.disk_usage('/').percent],
+        "gpu": [[{"id": gpu.id, "load": gpu.load * 100} for gpu in GPUtil.getGPUs()]],
+        "time":[datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")]
+	}
+	return stats
 
 def readLogFile(logFile,pop=False):
 	with open(logFile) as f:

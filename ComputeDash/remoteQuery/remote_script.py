@@ -9,18 +9,10 @@ def mainParser():
 	
 
 	return parser
-def scrape_data():
-	stats = {
-		"cpu":[psutil.cpu_percent(interval=1)],
-		"memory": [psutil.virtual_memory().percent],
-        "disk": [psutil.disk_usage('/').percent],
-        "gpu": [[{"id": gpu.id, "load": gpu.load * 100} for gpu in GPUtil.getGPUs()]],
-        "time":[datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")]
-	}
-	return stats
+
 
 if __name__ == "__main__":
 	parser = mainParser()
 	args, otherArgs = parser.parse_known_args()
-	current_stats = scrape_data()
+	current_stats = gu.scrape_data()
 	gu.updateLogFile(args.log_file,current_stats)
