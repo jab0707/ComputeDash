@@ -16,8 +16,6 @@ def mainParser():
 	parser.add_argument("--configLoc",default='../../configs/localConfig.json',help="Config.json location")
 	parser.add_argument("--nodes",default='all',help='Which nodes to run on')
 	parser.add_argument("--verbocity",type=int,default=1,help='Level of verbocity. Higher the level, the more detailed messages. Scale from 0 (no message) to like 4 or something.')
-	parser.add_argument("--wait_delay", default=gp.WAIT_INTERVAL,type=int, help="")
-	parser.add_argument("--repeate_times", default=gp.REPEATE_LIMIT,type=int, help="")
 
 	return parser
 
@@ -50,29 +48,17 @@ if __name__ == "__main__":
 		node.setupConfig(config['SSH_INFO'],config['LOCAL_INFO'],'recurring_remote_query.py')
 		node.useJumphost = args.jumphost
 		allNodes.append(node)
-	while repeate_num < args.repeate_times:
-		repeate_num +=1
-		gu.infoDump(f"Running on all of these: {' '.join(nodesToRun)}",3)
-		for node in allNodes:
-			gu.infoDump(f'\n=====Running usage diagnostics on {node.LABEL}=====',0)
-			
-			if node.establish_connection() != 0:
-				gu.infoDump('Failed during connection',gp.ERROR_VERBOCITY)
-				continue
-			if node.update_log_file() != 0:
-				gu.infoDump('Failed during log update',gp.ERROR_VERBOCITY)
-				continue
-			print('reading log')
-			log = gu.readLogFile(node.localLogFile,pop=False)#pop causes us to delete the local log
-			node.print_log_info()
-			print('Writting as binary')
-			gu.writeLogHistory(node.localLogFile.replace('.stats','.npy'),log)
 
-			node.close_connection()
+	gu.infoDump(f"Running on all of these: {' '.join(nodesToRun)}",3)
+	for node in allNodes:
+		gu.infoDump(f'\n=====Running usage diagnostics on {node.LABEL}=====',0)
+
+		print('reading log')
+		log = gu.readLogFile(node.localLogFile,pop=True)#pop causes us to delete the local log
+		if node.print_log_info() !=0:
+			gu.infoDump('Error in printing log',gp.ERROR_VERBOCITY)
 
 
-			gu.infoDump(f'Done with {node.LABEL}\n',0)
-		gu.infoDump(f'Sleeping for {args.wait_delay} sec\n',0)
-		time.sleep(args.wait_delay)
+		gu.infoDump(f'Done with {node.LABEL}\n',0)
 
 

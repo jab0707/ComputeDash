@@ -163,3 +163,4 @@ cython_debug/
 #OTHER
 /logs/*
 
+.DS_Store

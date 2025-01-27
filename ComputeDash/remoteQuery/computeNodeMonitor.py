@@ -107,22 +107,35 @@ class node:
 			return 1
 		return 0
 
-	def print_log_info(self):
+	def print_log_info(self,logFile=None,stats=None):
+		if logFile is None:
+			logFile = self.localLogFile
 		try:
-			gu.infoDump(f'Attempting to read local log:\n\t{self.localLogFile}')
-			with open(self.localLogFile) as f:
+			gu.infoDump(f'Attempting to read log:\n\t{logFile}')
+			with open(logFile) as f:
 				stats = json.load(f)
 			priority=0
 			gu.infoDump(f"Node : {self.LABEL}:",priority)
 			gu.infoDump(f"\tCPU   : {stats['cpu']}% loaded",priority)
 			gu.infoDump(f"\tMEMORY: {stats['memory']}% loaded",priority)
 			gu.infoDump(f"\tDISK  : {stats['disk']}% loaded",priority)
-			gpuInfo = ''.join([f"GPU:{g['id']} : {g['load']}% loaded\n\t        " for g in stats['gpu']])
+			
+			gpuIds = [g['id'] for g in stats['gpu'][0]]
+			gpuLoads = [[] for _ in gpuIds]
+			
+			for log in stats['gpu']:
+
+				for gpuIx in range(len(gpuIds)):
+					gpuLoads[gpuIx].extend([log[gpuIx]['load']])
+			
+			gpuInfo = ''.join([f"GPU:{gpuIds[ix]} : {gpuLoads[ix]}% loaded\n\t        " for ix in range(len(gpuIds))])
 			if len(gpuInfo)>1:
 				gu.infoDump(f"\tGPU   : {gpuInfo}",priority)
-		except:
+		except Exception as e:
+			gu.infoDump(e,gp.ERROR_VERBOCITY)
 			return 1
 		return 0
+		
 	@check_for_config
 	def close_connection(self):
 		if self.jump_client is not None:
