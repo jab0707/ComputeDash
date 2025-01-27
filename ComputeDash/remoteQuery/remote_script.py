@@ -22,6 +22,5 @@ def scrape_data():
 if __name__ == "__main__":
 	parser = mainParser()
 	args, otherArgs = parser.parse_known_args()
-	pathlib.Path(args.log_file).touch()
 	current_stats = scrape_data()
 	gu.updateLogFile(args.log_file,current_stats)
