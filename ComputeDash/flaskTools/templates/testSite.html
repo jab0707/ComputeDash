@@ -4,13 +4,14 @@
         Comput Monitor Dashboard
     </title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/css/bootstrap.min.css" integrity="sha256-/ykJw/wDxMa0AQhHDYfuMEwVb4JHMx9h4jD4XvHqVzU=" crossorigin="anonymous" />
 </head>
 
 
 <body>
 	
-
-
+	<h1 align="center">{{LABEL}}</h1>
+	<a align="center" href="{{ url_for('main') }}">Home</a><br>
 
 	<canvas id="myChart" width="900" height="400"></canvas>
 
@@ -19,7 +20,7 @@
 	  const gpuData = {{GPU | safe}}
 	  
 	  const gpuDatas = gpuData.map((individualData,index) => ({
-	  	label : 'GPU ${index  1}',
+	  	label : `GPU ${index}`,
 	  	data : individualData,
 	  	color : `rgba(${(index * 50) % 255}, ${(index * 100) % 255}, ${(index * 150) % 255}, 0.7)`
 	  }))

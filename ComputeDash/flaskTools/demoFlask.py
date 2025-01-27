@@ -3,23 +3,37 @@ import json,os
 
 import ComputeDash.utils.general_utils as gu
 import ComputeDash.utils.globalParams as gp
+import ComputeDash.flaskTools.flask_utils as fu
+from types import FunctionType
+
+
 app = flask.Flask(__name__)
 
+with open('../'+gp.CONFIG_LOC+'localConfig.json') as f:
+	config = json.load(f)
 
+
+pages=[]
+for node in config['NODES'].keys():
+	print(node)
+	page_code = compile(f'def {node.replace("-","_")}(): return fu.node_page("{node}")', "<string>", "exec")
+	page_func = FunctionType(page_code.co_consts[0], globals(), f"{node}")
+	pages.append(page_func.__name__)
+	print(page_func.__name__)
+	app.route(f'/{node}')(page_func)
 
 @app.route('/')
 def main():
-	
-	logHistory = gu.readLogHistory('../'+gp.LOG_LOC+'zagreus.npy')
-	time=[str(ix) for ix in range(logHistory.shape[1])]
-	cpu = logHistory[0,:].tolist()
-	memory = logHistory[1,:].tolist()
-	disk = logHistory[2,:].tolist()
-	num_gpu = int(logHistory[3,1])
-	gpu_ids = logHistory[4:4+num_gpu,0].tolist()
-	gpu = logHistory[4+num_gpu:4+num_gpu+num_gpu,:].tolist()
-	print(f'sending:\n{cpu}\n{memory}\n{disk}\n{gpu_ids}\n{gpu}\n{time}')
-	return flask.render_template('testSite.html',LABEL='zagreus',CPU=cpu,MEMORY=memory,DISK=disk,GPU=gpu,TIME=time)
+	return flask.render_template('main.html',NODES=pages)
+
+
+
+
+
+
+
+
+
 
 if __name__=="__main__":
 	app.run(host="0.0.0.0",port=5000)

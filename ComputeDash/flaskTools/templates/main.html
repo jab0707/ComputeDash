@@ -1,0 +1,21 @@
+<html>
+<head>
+    <title>
+        Comput Monitor Dashboard
+    </title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/css/bootstrap.min.css" integrity="sha256-/ykJw/wDxMa0AQhHDYfuMEwVb4JHMx9h4jD4XvHqVzU=" crossorigin="anonymous" />
+</head>
+
+
+<body>
+
+<h1 align="center">Nodes</h1>
+
+{% for node_name in NODES %}
+
+<a align="center" href="{{ url_for(node_name) }}">{{node_name}}</a><br>
+
+{% endfor %}
+</body>
+</head>
