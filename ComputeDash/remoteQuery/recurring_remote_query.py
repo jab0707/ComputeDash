@@ -4,7 +4,7 @@ import ComputeDash.utils.general_utils as gu
 def mainParser():
 	parser = argparse.ArgumentParser(add_help=False)
 	# add arguments that we may want to change from one simulation to another
-	parser.add_argument("--wait_delay", default=gp.WAIT_INTERVAL, help="")
+	parser.add_argument("--wait_delay", default=gp.WAIT_INTERVAL, type=int,help="")
 	parser.add_argument("--repeate_times", default=gp.REPEATE_LIMIT,type=int, help="")
 	parser.add_argument("--log_file", default='log.stats', help="")
 	return parser
