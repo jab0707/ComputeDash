@@ -5,7 +5,7 @@ def mainParser():
 	parser = argparse.ArgumentParser(add_help=False)
 	# add arguments that we may want to change from one simulation to another
 	parser.add_argument("--wait_delay", default=gp.WAIT_INTERVAL, help="")
-	parser.add_argument("--repeate_times", default=gp.REPEATE_LIMIT, help="")
+	parser.add_argument("--repeate_times", default=gp.REPEATE_LIMIT,type=int, help="")
 	parser.add_argument("--log_file", default='log.stats', help="")
 	return parser
 
@@ -34,5 +34,6 @@ if __name__ == "__main__":
 		logStats(current_stats,args.log_file)
 		gu.infoDump('Waiting for {args.wait_delay} sec',1)
 		time.sleep(args.wait_delay)
+		repeate_num= repeate_num + 1
 
 

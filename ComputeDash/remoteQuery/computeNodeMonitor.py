@@ -69,7 +69,7 @@ class node:
 		args = self.wrappingScript[1:]
 		if additionalArgs is not None:
 			args.extend(additionalArgs)
-		return shu.execute_remote_script(self.ssh_client,self.wrappingScript[0],self.wrappingScript[1:],prefix=prefix)
+		return shu.execute_remote_script(self.ssh_client,self.wrappingScript[0],args,prefix=prefix)
 		
 
 	@check_for_config
