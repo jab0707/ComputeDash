@@ -63,9 +63,10 @@ if __name__ == "__main__":
 				gu.infoDump('Failed during log update',gp.ERROR_VERBOCITY)
 				continue
 			print('reading log')
-			log = gu.readLogFile(node.localLogFile)
+			log = gu.readLogFile(node.localLogFile,pop=True)#pop causes us to delete the local log
 			print('Writting as binary')
 			gu.writeLogHistory(node.localLogFile.replace('.stats','.npy'),log)
+
 			node.close_connection()
 
 

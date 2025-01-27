@@ -61,7 +61,11 @@ class node:
 
 	@check_for_config
 	def update_log_file(self):
-		return shu.fetch_remote_file(self.ssh_client, self.remoteLogFile, self.localLogFile)
+		fetchResult = shu.fetch_remote_file(self.ssh_client, self.remoteLogFile, self.localLogFile)
+		if fetchResult == 1:
+			return fetchResult
+		cleanup_result = shu.execute_remote_command(self.ssh_client,f'rm {self.remoteLogFile}')
+		return cleanup_result
 
 	@check_for_config
 	def run_remote_scirpt(self,additionalArgs=None,prefix=''):

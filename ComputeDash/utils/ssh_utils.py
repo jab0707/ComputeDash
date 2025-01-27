@@ -36,6 +36,22 @@ def fetch_remote_file(ssh_client, remote_file_path, local_file_path):
 		gu.infoDump('Could not fetch file.',2)
 		return 1
 
+def execute_remote_command(ssh_client,command):
+	try:
+		gu.infoDump(f'Attempting to run:\n{command}',2)
+		stdin, stdout, stderr = ssh_client.exec_command(command)
+
+		# Read the output
+		output = stdout.read().decode()
+		error = stderr.read().decode()
+		gu.infoDump(f'output from command execution\n{output}',1)
+		if error:
+			gu.infoDump(f"Error occurred: {error}",gp.ERROR_VERBOCITY)
+			return 1
+		return 0
+	except Exception as e:
+		gu.infoDump(e,gp.ERROR_VERBOCITY)
+		return 1
 
 def execute_remote_script(ssh_client, remote_script_path,args=None,prefix=''):
 	"""

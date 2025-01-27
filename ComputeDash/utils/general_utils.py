@@ -2,10 +2,21 @@ import ComputeDash.utils.globalParams as gp
 import json, os
 import numpy as np
 
-def readLogFile(logFile):
+def readLogFile(logFile,pop=False):
 	with open(logFile) as f:
 		stats = json.load(f)
+    if pop:
+        os.remove(logFile)
 	return stats
+def updateLogFile(logFile,logData,clean=False):
+    if os.path.isfile(logFile) and not clean:
+        oldLog = readLogFile(logFile)
+        for key in logData.keys():
+            logData[key].extend(oldLog[key])
+    with open(logFile, "w") as f:#if clean is true, will overwrite to make a fresh log file
+        json.dump(logData, f)
+
+
 
 def infoDump(message,priority=-1):
 	if priority < gp.VERBOCITY:

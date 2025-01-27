@@ -1,5 +1,5 @@
-import json, psutil, GPUtil, time, pathlib,sys,argparse
-
+import json, psutil, GPUtil, time, pathlib,sys,argparse,datetime
+import ComputeDash.utils.general_utils as gu
 
 def mainParser():
 	parser = argparse.ArgumentParser(add_help=False)
@@ -11,22 +11,17 @@ def mainParser():
 	return parser
 def scrape_data():
 	stats = {
-		"cpu":psutil.cpu_percent(interval=1),
-		"memory": psutil.virtual_memory().percent,
-        "disk": psutil.disk_usage('/').percent,
-        "gpu": [{"id": gpu.id, "load": gpu.load * 100} for gpu in GPUtil.getGPUs()],
-        "time":time.time()
+		"cpu":[psutil.cpu_percent(interval=1)],
+		"memory": [psutil.virtual_memory().percent],
+        "disk": [psutil.disk_usage('/').percent],
+        "gpu": [[{"id": gpu.id, "load": gpu.load * 100} for gpu in GPUtil.getGPUs()]],
+        "time":[datetime.datetime.now()]
 	}
 	return stats
-
-def logStats(stats,file):
-	with open(file, "w") as f:
-		json.dump(stats, f)
 
 if __name__ == "__main__":
 	parser = mainParser()
 	args, otherArgs = parser.parse_known_args()
-	
 	pathlib.Path(args.log_file).touch()
 	current_stats = scrape_data()
-	logStats(current_stats,args.log_file)
+	gu.updateLogFile(current_stats,args.log_file)
