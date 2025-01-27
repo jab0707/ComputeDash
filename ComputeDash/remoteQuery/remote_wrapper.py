@@ -18,7 +18,7 @@ if __name__=="__main__":
 	command = [args.interpreter, args.remote_script]
 	command.extend(otherArgs)
 	print(f'Attmepting to run like so:\n{' '.join(command)} ')
-	result = subprocess.run(command)
+	result = subprocess.run(command,capture_output = True,text = True)
 	print(result.stdout)
 	print(result.stderr)
 	print('Done')
