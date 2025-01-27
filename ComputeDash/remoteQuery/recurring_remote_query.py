@@ -35,7 +35,7 @@ if __name__ == "__main__":
 		pathlib.Path(args.log_file).touch()
 		current_stats = scrape_data()
 		logStats(current_stats,args.log_file)
-		gu.infoDump('Waiting for {args.wait_delay} sec',1)
+		gu.infoDump(f'Waiting for {args.wait_delay} sec',1)
 		time.sleep(args.wait_delay)
 		repeate_num= repeate_num + 1
 
