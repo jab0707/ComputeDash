@@ -6,6 +6,7 @@ def mainParser():
 	# add arguments that we may want to change from one simulation to another
 	parser.add_argument("--wait_delay", default=gp.WAIT_INTERVAL, help="")
 	parser.add_argument("--repeate_times", default=gp.REPEATE_LIMIT, help="")
+	return parser
 
 
 def scrape_data():
