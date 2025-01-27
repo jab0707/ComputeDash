@@ -15,7 +15,7 @@ def scrape_data():
 		"memory": [psutil.virtual_memory().percent],
         "disk": [psutil.disk_usage('/').percent],
         "gpu": [[{"id": gpu.id, "load": gpu.load * 100} for gpu in GPUtil.getGPUs()]],
-        "time":[datetime.datetime.now()]
+        "time":[datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")]
 	}
 	return stats
 
