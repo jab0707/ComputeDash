@@ -53,7 +53,7 @@ if __name__ == "__main__":
 		if node.establish_connection() != 0:
 			gu.infoDump('Failed during connection',gp.ERROR_VERBOCITY)
 			continue
-		if node.run_remote_scirpt(['--wait_delay',f'{args.wait_delay}','--repeate_times',args.repeate_times, f"> ~/{node.LABEL}.log 2>&1", '&'],prefix='nohup ') != 0:
+		if node.run_remote_scirpt(['--wait_delay',f'{args.wait_delay}','--verbocity',{args.verbocity},'--repeate_times',args.repeate_times, f"> ~/{node.LABEL}.log 2>&1", '&'],prefix='nohup ') != 0:
 			gu.infoDump('Failed during load check',gp.ERROR_VERBOCITY)
 			continue
 		node.close_connection()
