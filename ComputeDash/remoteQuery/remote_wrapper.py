@@ -19,3 +19,4 @@ if __name__=="__main__":
 	command.extend(otherArgs)
 	print(f'Attmepting to run like so:\n{' '.join(command)} ')
 	subprocess.run(command)
+	print('Done')
