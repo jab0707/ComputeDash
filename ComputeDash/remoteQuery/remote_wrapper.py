@@ -15,6 +15,7 @@ if __name__=="__main__":
 	args, otherArgs = parser.parse_known_args()
 	
 	# Pass all arguments to the main script
-	command = [args.interpreter, args.remote_script, otherArgs]
+	command = [args.interpreter, args.remote_script]
+	command.extend(otherArgs)
 	print(f'Attmepting to run like so:\n{' '.join(command)} ')
 	subprocess.run(command)
