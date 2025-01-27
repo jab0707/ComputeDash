@@ -24,4 +24,4 @@ if __name__ == "__main__":
 	args, otherArgs = parser.parse_known_args()
 	pathlib.Path(args.log_file).touch()
 	current_stats = scrape_data()
-	gu.updateLogFile(current_stats,args.log_file)
+	gu.updateLogFile(args.log_file,current_stats)
