@@ -1,8 +1,73 @@
 <html>
-	<body>
-		<h1> {{LABEL}} </h1>
-		<p> CPU load: {{CPU}} %</p>
-		<p> GPUs: {{GPU}} </p>
-	</body>
+<head>
+    <title>
+        Comput Monitor Dashboard
+    </title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+
+<body>
+	
+
+
+
+	<canvas id="myChart" width="900" height="400"></canvas>
+
+	<script>
+	  var context = document.getElementById('myChart').getContext("2d");
+	  const gpuData = {{GPU | safe}}
+	  
+	  const gpuDatas = gpuData.map((individualData,index) => ({
+	  	label : 'GPU ${index  1}',
+	  	data : individualData,
+	  	color : `rgba(${(index * 50) % 255}, ${(index * 100) % 255}, ${(index * 150) % 255}, 0.7)`
+	  }))
+	  const plotDatas = [
+	  {
+	  	label : "CPU Load",
+	  	data  :  {{CPU | safe}},
+	  	color: "rgba(0, 0, 255, 0.7)"
+	  },
+	  {
+	  	label : "Memory Load",
+	  	data  :  {{MEMORY | safe}},
+	  	color: "rgba(255, 0, 0, 0.7)"
+	  },
+	  {
+	  	label : "Disk Load",
+	  	data  :  {{DISK | safe}},
+	  	color: "rgba(0, 255, 0, 0.7)"
+	  }
+	  	]
+
+	  const allData = [...plotDatas, ...gpuDatas]
+
+	  const chartConfig = {
+	  	type : 'line',
+	  	data : {
+	  		labels : {{TIME | safe}},
+	  		datasets : allData
+	  	},
+	  	options : {
+	  		responsive : true
+	  	}
+	  }
+
+	  new Chart(context,chartConfig);
+	</script>
+</body>
 
 </html>
+
+
+
+<!-- <h1> {{LABEL}} </h1>
+<pre class="tab1">CPU load    : {{CPU}} %</pre>
+<pre class="tab1">Memory load : {{MEMORY}} %</pre>
+<pre class="tab1">Disk load   : {{DISK}} %</pre>
+<pre class="tab1">GPU Load    : </pre>
+	{% for gpu in GPU %}
+		<pre class="tab1">            ID {{gpu['id']}} : {{gpu['load']}} % </pre> 
+	{% endfor %}
+</p> -->

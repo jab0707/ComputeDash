@@ -37,7 +37,7 @@ def fetch_remote_file(ssh_client, remote_file_path, local_file_path):
 		return 1
 
 
-def execute_remote_script(ssh_client, remote_script_path,args=None):
+def execute_remote_script(ssh_client, remote_script_path,args=None,prefix=''):
 	"""
 	Executes a remote script via SSH.
 
@@ -49,7 +49,7 @@ def execute_remote_script(ssh_client, remote_script_path,args=None):
 
 	try:
 		# Command to execute the remote script
-		command = f"python3 {remote_script_path} "
+		command = f"{prefix}python3 {remote_script_path} "
 		if args is not None:
 			command +=  ' '.join(args)
 		gu.infoDump(f'Attempting to run:\n{command}',2)

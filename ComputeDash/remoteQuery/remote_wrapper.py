@@ -1,20 +1,21 @@
-import subprocess, sys, os
+import subprocess, sys, os, argparse
+import ComputeDash.utils.general_utils as gu
 
+def mainParser():
+	parser = argparse.ArgumentParser(add_help=False)
+	# add arguments that we may want to change from one simulation to another
+	parser.add_argument("--interpreter", default='python3', help="")
+	parser.add_argument("--remote_script", default='remote_script.py', help="")
+	
 
-
-
-# Read the interpreter path from settings.yaml
+	return parser
 
 
 if __name__=="__main__":
-
-	if len(sys.argv)!=4:
-		print("That didn't work")
-		sys.exit(1)
-	interpreter=sys.argv[1]
-	basePath = sys.argv[2]
-	args = sys.argv[3:]
+	parser = mainParser()
+	args, otherArgs = parser.parse_known_args()
+	
 	# Pass all arguments to the main script
-	command = [interpreter, basePath+'remote_script.py', *args]
+	command = [args.interpreter, args.remote_script, otherArgs]
 	print(f'Attmepting to run like so:\n{' '.join(command)} ')
 	subprocess.run(command)

@@ -1,6 +1,14 @@
-import json, psutil, GPUtil, time, pathlib,sys
+import json, psutil, GPUtil, time, pathlib,sys,argparse
 
 
+def mainParser():
+	parser = argparse.ArgumentParser(add_help=False)
+	# add arguments that we may want to change from one simulation to another
+	parser.add_argument("--log_file", default='log.stats', help="")
+
+	
+
+	return parser
 def scrape_data():
 	stats = {
 		"cpu":psutil.cpu_percent(interval=1),
@@ -16,10 +24,9 @@ def logStats(stats,file):
 		json.dump(stats, f)
 
 if __name__ == "__main__":
-	if len(sys.argv) != 2:
-		print("Usage: remote_script.py <statsFile>")
-		sys.exit(1)
-	statsFile = sys.argv[1]
-	pathlib.Path(statsFile).touch()
+	parser = mainParser()
+	args, otherArgs = parser.parse_known_args()
+	
+	pathlib.Path(args.log_file).touch()
 	current_stats = scrape_data()
-	logStats(current_stats,statsFile)
+	logStats(current_stats,args.log_file)

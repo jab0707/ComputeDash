@@ -36,7 +36,7 @@ class node:
 
 
 
-	def setupConfig(self,sshConfig,localConfig):
+	def setupConfig(self,sshConfig,localConfig,remoteTargetScript='remote_script.py'):
 		#ssh info
 		self.jumphost = sshConfig['JUMP_HOST']
 		self.username = sshConfig['USERNAME']
@@ -48,12 +48,12 @@ class node:
 		self.remoteLogFile = self.BASE_PATH + self.LOG_PATH + self.LOG_FILE
 		
 		#remote script location and arguments
-		script = self.BASE_PATH + self.SCRIP_PATH
-		scriptDir = os.path.dirname(script) + '/'
-		scrip_args = [self.INTERP_PATH,scriptDir,self.remoteLogFile]
-		loadCheckScript = [script]
-		loadCheckScript.extend(scrip_args)
-		self.loadCheckScript = loadCheckScript
+		wrapping_script = self.BASE_PATH + self.SCRIP_PATH
+		remoteScript = os.path.dirname(wrapping_script) + '/' + remoteTargetScript
+		scrip_args = ['--interpreter', self.INTERP_PATH,'--remote_script', remoteScript,'--log_file',self.remoteLogFile]
+		wrappingScript = [wrapping_script]
+		wrappingScript.extend(scrip_args)
+		self.wrappingScript = wrappingScript
 
 
 		self._isConfiged = True
@@ -64,9 +64,12 @@ class node:
 		return shu.fetch_remote_file(self.ssh_client, self.remoteLogFile, self.localLogFile)
 
 	@check_for_config
-	def run_load_check(self):
-		gu.infoDump(f'Sending the following command:\n{self.loadCheckScript}',2)
-		return shu.execute_remote_script(self.ssh_client,self.loadCheckScript[0],self.loadCheckScript[1:])
+	def run_remote_scirpt(self,additionalArgs=None,prefix=''):
+		gu.infoDump(f'Sending the following command:\n{prefix}{self.wrappingScript}{additionalArgs}',2)
+		args = self.wrappingScript[1:]
+		if additionalArgs is not None:
+			args.extend(additionalArgs)
+		return shu.execute_remote_script(self.ssh_client,self.wrappingScript[0],self.wrappingScript[1:],prefix=prefix)
 		
 
 	@check_for_config
