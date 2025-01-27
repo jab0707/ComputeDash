@@ -4,15 +4,30 @@
         Comput Monitor Dashboard
     </title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/css/bootstrap.min.css" integrity="sha256-/ykJw/wDxMa0AQhHDYfuMEwVb4JHMx9h4jD4XvHqVzU=" crossorigin="anonymous" />
+	<style>
+		a.button {
+	        display: inline-block; /* Allows vertical margins to work */
+	        margin-bottom: 20px; /* Adds vertical spacing between buttons */
+	        padding: 6px 12px; /* Adjusts button size */
+	        border: 3px outset buttonborder;
+	        border-radius: 5px; /* Adds rounded corners */
+	        color: buttontext;
+	        background-color: buttonface;
+	        text-decoration: none;
+	    }
+	    .center {
+        text-align: center; /* Centers content horizontally */
+        margin-bottom: 20px; /* Adds spacing between rows of buttons */
+    	}
+		</style>
 </head>
-
 
 <body>
 	
 	<h1 align="center">{{LABEL}}</h1>
-	<a align="center" href="{{ url_for('main') }}">Home</a><br>
-
+	<div class="center">
+		<a align="center" href="{{ url_for('main') }}" class="button">Home</a><br>
+	</div>
 	<canvas id="myChart" width="900" height="400"></canvas>
 
 	<script>

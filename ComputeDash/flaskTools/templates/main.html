@@ -3,8 +3,22 @@
     <title>
         Comput Monitor Dashboard
     </title>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/css/bootstrap.min.css" integrity="sha256-/ykJw/wDxMa0AQhHDYfuMEwVb4JHMx9h4jD4XvHqVzU=" crossorigin="anonymous" />
+	<style>
+		a.button {
+	        display: inline-block; 
+	        margin-bottom: 20px; 
+	        padding: 6px 12px; 
+	        border: 3px outset buttonborder;
+	        border-radius: 5px; 
+	        color: buttontext;
+	        background-color: buttonface;
+	        text-decoration: none;
+	    }
+	    .center {
+        text-align: center; 
+        margin-bottom: 20px; 
+    	}
+		</style>
 </head>
 
 
@@ -13,9 +27,9 @@
 <h1 align="center">Nodes</h1>
 
 {% for node_name in NODES %}
-
-<a align="center" href="{{ url_for(node_name) }}">{{node_name}}</a><br>
-
+<div class="center">
+<a align="center" href="{{ url_for(node_name) }}" class="button">{{node_name}}</a>
+</div>
 {% endfor %}
 </body>
-</head>
+</html>
