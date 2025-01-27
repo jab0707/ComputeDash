@@ -50,7 +50,7 @@ if __name__ == "__main__":
 		if node.establish_connection() != 0:
 			gu.infoDump('Failed during connection',globalParams.ERROR_VERBOCITY)
 			continue
-		if node.run_load_check() != 0:
+		if node.run_remote_scirpt() != 0:
 			gu.infoDump('Failed during load check',globalParams.ERROR_VERBOCITY)
 			continue
 		if node.update_log_file() != 0:
