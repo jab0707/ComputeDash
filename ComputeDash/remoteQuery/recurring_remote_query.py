@@ -22,9 +22,6 @@ def scrape_data():
 	}
 	return stats
 
-def logStats(stats,file):
-	with open(file, "w") as f:
-		json.dump(stats, f)
 
 if __name__ == "__main__":
 	parser = mainParser()
@@ -32,9 +29,8 @@ if __name__ == "__main__":
 	gp.VERBOCITY = args.verbocity
 	repeate_num = 0
 	while repeate_num < args.repeate_times:
-		pathlib.Path(args.log_file).touch()
 		current_stats = scrape_data()
-		logStats(current_stats,args.log_file)
+		gu.updateLogFile(args.log_file,current_stats)
 		gu.infoDump(f'Waiting for {args.wait_delay} sec',1)
 		time.sleep(args.wait_delay)
 		repeate_num= repeate_num + 1
