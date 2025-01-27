@@ -35,3 +35,5 @@ if __name__ == "__main__":
 		current_stats = scrape_data()
 		logStats(current_stats,statsFile)
 		time.sleep(args.wait_delay)
+
+

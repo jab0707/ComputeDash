@@ -1,9 +1,9 @@
 import json,os,sys,argparse
 import ComputeDash.utils.general_utils as gu
-import ComputeDash.utils.globalParams as globalParams
+import ComputeDash.utils.globalParams as gp
 import ComputeDash.remoteQuery.computeNodeMonitor as computeNodeMonitor
 
-globalParams.ERROR_VERBOCITY=-1#give errors high priority during testing
+gp.ERROR_VERBOCITY=-1#give errors high priority during testing
 #This would effectivly suppress errors: globalParams.ERROR_VERBOCITY=100000
 
 def mainParser():
@@ -24,7 +24,7 @@ if __name__ == "__main__":
 
 	parser = mainParser()
 	args = parser.parse_args()
-	globalParams.VERBOCITY = args.verbocity
+	gp.VERBOCITY = args.verbocity
 
 	gu.infoDump(f'arguments: {args}',3)
 
@@ -51,10 +51,10 @@ if __name__ == "__main__":
 		gu.infoDump(f'\n=====Running usage diagnostics on {node.LABEL}=====',0)
 		
 		if node.establish_connection() != 0:
-			gu.infoDump('Failed during connection',globalParams.ERROR_VERBOCITY)
+			gu.infoDump('Failed during connection',gp.ERROR_VERBOCITY)
 			continue
 		if node.run_remote_scirpt(['--wait_delay',f'{args.wait_delay}','--repeate_times',args.repeate_times,'&'],prefix='nohup ') != 0:
-			gu.infoDump('Failed during load check',globalParams.ERROR_VERBOCITY)
+			gu.infoDump('Failed during load check',gp.ERROR_VERBOCITY)
 			continue
 		node.close_connection()
 
