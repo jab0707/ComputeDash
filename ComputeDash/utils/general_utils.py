@@ -39,16 +39,22 @@ def writeLogHistory(file,logDict):
 	existingData = None#CPU, MEMORY, DISK, GPU, time
 	if os.path.isfile(file):
 		existingData = readLogHistory(file)
-	dataToAdd = [[logDict['cpu']],
-				[logDict['memory']],
-				[logDict['disk']],
-				[len(logDict['gpu'])]]
-	gpuIds = [[g['id']] for g in logDict['gpu']]
-	gpuLoads = [[g['load']] for g in logDict['gpu']]
-	dataToAdd.extend(gpuIds)
+	dataToAdd = [logDict['cpu'],
+				logDict['memory'],
+				logDict['disk']]
+	gpuIds = [g['id'] for g in logDict['gpu'][0]]
+	gpuLoads = [[] for _ in gpuIds]
+			
+	for log in logDict['gpu']:
+
+		for gpuIx in range(len(gpuIds)):
+			gpuLoads[gpuIx].extend([log[gpuIx]['load']])
+	for gpuId in gpuIds:
+		dataToAdd.extend([[gpuId for _ in range(len(logDict['gpu'])) ]])
 	dataToAdd.extend(gpuLoads)
-	dataToAdd.extend([[logDict['time']]])
-	print(f'dataToAdd:\n{dataToAdd}')
+	dataToAdd.extend([logDict['time']])
+	print(f'dataToAdd:')
+	[print(f'{d}\n') for d in dataToAdd]
 	newData = np.array(dataToAdd)
 	print(f'NewData shape: {newData.shape}')
 	if existingData is not None:

@@ -59,7 +59,7 @@ if __name__ == "__main__":
 			if node.establish_connection() != 0:
 				gu.infoDump('Failed during connection',gp.ERROR_VERBOCITY)
 				continue
-			if node.update_log_file() != 0:
+			if node.update_log_file(cleanRemote=False) != 0:
 				gu.infoDump('Failed during log update',gp.ERROR_VERBOCITY)
 				continue
 			print('reading log')

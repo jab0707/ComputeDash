@@ -62,17 +62,21 @@ class node:
 	@check_for_config
 	def remove_remote_log_file(self):
 		output = 0
-		if shu.execute_remote_command(self.ssh_client,f'ls {self.remoteLogFile}') == 0:
+		if shu.execute_remote_command(self.ssh_client,f'ls {self.remoteLogFile}') == 0:#check if it exists first
 			output = shu.execute_remote_command(self.ssh_client,f'rm {self.remoteLogFile}')
 		return output
 
 	@check_for_config
-	def update_log_file(self):
+	def update_log_file(self,cleanRemote=True):
+		gu.infoDump('Fetching log file to local machine',1)
 		fetchResult = shu.fetch_remote_file(self.ssh_client, self.remoteLogFile, self.localLogFile)
 		if fetchResult == 1:
 			return fetchResult
-		cleanup_result = self.remove_remote_log_file()
-		return cleanup_result
+		output=0
+		if cleanRemote:
+			gu.infoDump('Cleaning remote log file',1)
+			output = self.remove_remote_log_file()
+		return output
 
 	@check_for_config
 	def run_remote_scirpt(self,additionalArgs=None,prefix=''):
