@@ -60,11 +60,18 @@ class node:
 		gu.infoDump('Config set',1)
 
 	@check_for_config
+	def remove_remote_log_file(self):
+		output = 0
+		if shu.execute_remote_command(self.ssh_client,f'ls {self.remoteLogFile}') == 0:
+			output = shu.execute_remote_command(self.ssh_client,f'rm {self.remoteLogFile}')
+		return output
+
+	@check_for_config
 	def update_log_file(self):
 		fetchResult = shu.fetch_remote_file(self.ssh_client, self.remoteLogFile, self.localLogFile)
 		if fetchResult == 1:
 			return fetchResult
-		cleanup_result = shu.execute_remote_command(self.ssh_client,f'rm {self.remoteLogFile}')
+		cleanup_result = self.remove_remote_log_file()
 		return cleanup_result
 
 	@check_for_config

@@ -53,6 +53,9 @@ if __name__ == "__main__":
 		if node.establish_connection() != 0:
 			gu.infoDump('Failed during connection',gp.ERROR_VERBOCITY)
 			continue
+		if node.remove_remote_log_file() != 0:
+			gu.infoDump('Failed to clean up old remote log file',gp.ERROR_VERBOCITY)
+			continue
 		if node.run_remote_scirpt(['--wait_delay',f'{args.wait_delay}','--verbocity',f'{args.verbocity}','--repeate_times',args.repeate_times, f"> ~/{node.LABEL}.log 2>&1", '&'],prefix='nohup ') != 0:
 			gu.infoDump('Failed during remote start',gp.ERROR_VERBOCITY)
 			continue
