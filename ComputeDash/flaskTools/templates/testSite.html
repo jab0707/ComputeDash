@@ -37,22 +37,27 @@
 	  const gpuDatas = gpuData.map((individualData,index) => ({
 	  	label : `GPU ${index}`,
 	  	data : individualData,
+	  	tension: 0.5,
 	  	color : `rgba(${(index * 50) % 255}, ${(index * 100) % 255}, ${(index * 150) % 255}, 0.7)`
 	  }))
 	  const plotDatas = [
 	  {
 	  	label : "CPU Load",
 	  	data  :  {{CPU | safe}},
+	  	tension: 0.5,
 	  	color: "rgba(0, 0, 255, 0.7)"
+
 	  },
 	  {
 	  	label : "Memory Load",
 	  	data  :  {{MEMORY | safe}},
+	  	tension: 0.5,
 	  	color: "rgba(255, 0, 0, 0.7)"
 	  },
 	  {
 	  	label : "Disk Load",
 	  	data  :  {{DISK | safe}},
+	  	tension: 0.5,
 	  	color: "rgba(0, 255, 0, 0.7)"
 	  }
 	  	]
