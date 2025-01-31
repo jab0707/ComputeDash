@@ -116,7 +116,9 @@ class node:
 		except:
 			gu.infoDump('SSH connection failed',gp.ERROR_VERBOCITY)
 			return 1
-		return 0
+		if self.ssh_client:
+			return 0
+		return 1
 
 	def print_log_info(self,logFile=None,stats=None):
 		if logFile is None:

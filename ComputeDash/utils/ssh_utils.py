@@ -68,7 +68,7 @@ def execute_remote_script(ssh_client, remote_script_path,args=None,prefix=''):
 
 	try:
 		# Command to execute the remote script
-		command = f"{prefix}python3 {remote_script_path} "
+		command = f"{prefix}python3 -u {remote_script_path} "
 		if args is not None:
 			command +=  ' '.join(args)
 		gu.infoDump(f'Attempting to run:\n{command}',2)
