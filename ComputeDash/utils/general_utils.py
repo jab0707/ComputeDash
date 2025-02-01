@@ -33,7 +33,8 @@ def infoDump(message,priority=-1):
 		print(message)
 
 def readLogHistory(file):
-	return np.load(file)
+	logFile = np.load(file)
+	return logFile
 
 def writeLogHistory(file,logDict):
 	existingData = None#CPU, MEMORY, DISK, GPU, time

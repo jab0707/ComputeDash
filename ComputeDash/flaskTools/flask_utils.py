@@ -1,15 +1,17 @@
 import flask
 import json,os
-
+import numpy as np
 import ComputeDash.utils.general_utils as gu
 import ComputeDash.utils.globalParams as gp
 
 
 
 
-def node_page(nodeId):
+def node_page(nodeId,logLoc):
 	print('Loading data')
-	logHistory = gu.readLogHistory('../'+gp.LOG_LOC+f'{nodeId}.npy')
+	logHistory = gu.readLogHistory(logLoc+f'/{nodeId}.npy')
+	print(f'{logHistory}')
+	logHistory=np.sort(logHistory,-1)
 	time=[str(t) for t in logHistory[-1,:]]
 	cpu = logHistory[0,:].tolist()
 	memory = logHistory[1,:].tolist()

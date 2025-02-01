@@ -1,24 +1,25 @@
 <html>
 <head>
-    <title>
-        Comput Monitor Dashboard
-    </title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<title>
+		Comput Monitor Dashboard
+	</title>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
 	<style>
 		a.button {
-	        display: inline-block; /* Allows vertical margins to work */
-	        margin-bottom: 20px; /* Adds vertical spacing between buttons */
-	        padding: 6px 12px; /* Adjusts button size */
-	        border: 3px outset buttonborder;
-	        border-radius: 5px; /* Adds rounded corners */
-	        color: buttontext;
-	        background-color: buttonface;
-	        text-decoration: none;
-	    }
-	    .center {
-        text-align: center; /* Centers content horizontally */
-        margin-bottom: 20px; /* Adds spacing between rows of buttons */
-    	}
+			display: inline-block; /* Allows vertical margins to work */
+			margin-bottom: 20px; /* Adds vertical spacing between buttons */
+			padding: 6px 12px; /* Adjusts button size */
+			border: 3px outset buttonborder;
+			border-radius: 5px; /* Adds rounded corners */
+			color: buttontext;
+			background-color: buttonface;
+			text-decoration: none;
+		}
+		.center {
+		text-align: center; /* Centers content horizontally */
+		margin-bottom: 20px; /* Adds spacing between rows of buttons */
+		}
 		</style>
 </head>
 
@@ -35,44 +36,59 @@
 	  const gpuData = {{GPU | safe}}
 	  
 	  const gpuDatas = gpuData.map((individualData,index) => ({
-	  	label : `GPU ${index}`,
-	  	data : individualData,
-	  	tension: 0.5,
-	  	color : `rgba(${(index * 50) % 255}, ${(index * 100) % 255}, ${(index * 150) % 255}, 0.7)`
+		label : `GPU ${index}`,
+		data : individualData,
+		tension: 0.5,
+		color : `rgba(${(index * 50) % 255}, ${(index * 100) % 255}, ${(index * 150) % 255}, 0.7)`
 	  }))
 	  const plotDatas = [
 	  {
-	  	label : "CPU Load",
-	  	data  :  {{CPU | safe}},
-	  	tension: 0.5,
-	  	color: "rgba(0, 0, 255, 0.7)"
+		label : "CPU Load",
+		data  :  {{CPU | safe}},
+		tension: 0.5,
+		color: "rgba(0, 0, 255, 0.7)"
 
 	  },
 	  {
-	  	label : "Memory Load",
-	  	data  :  {{MEMORY | safe}},
-	  	tension: 0.5,
-	  	color: "rgba(255, 0, 0, 0.7)"
+		label : "Memory Load",
+		data  :  {{MEMORY | safe}},
+		tension: 0.5,
+		color: "rgba(255, 0, 0, 0.7)"
 	  },
 	  {
-	  	label : "Disk Load",
-	  	data  :  {{DISK | safe}},
-	  	tension: 0.5,
-	  	color: "rgba(0, 255, 0, 0.7)"
+		label : "Disk Load",
+		data  :  {{DISK | safe}},
+		tension: 0.5,
+		color: "rgba(0, 255, 0, 0.7)"
 	  }
-	  	]
+		]
 
 	  const allData = [...plotDatas, ...gpuDatas]
 
 	  const chartConfig = {
-	  	type : 'line',
-	  	data : {
-	  		labels : {{TIME | safe}},
-	  		datasets : allData
-	  	},
-	  	options : {
-	  		responsive : true
-	  	}
+		type : 'line',
+		data : {
+			labels : {{TIME | safe}},
+			datasets : allData
+		},
+		options : {
+			responsive : true,
+			plugins : {
+				zoom: {
+					pan: {
+					  enabled : true,
+					  mode : 'x',
+					  modifierKey :'shift'
+					},
+					zoom: {
+						mode :'xy',
+						drag : {
+							enabled : true
+						}
+					}
+				}
+			}
+		}
 	  }
 
 	  new Chart(context,chartConfig);
