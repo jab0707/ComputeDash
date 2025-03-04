@@ -21,9 +21,11 @@ if __name__ == "__main__":
 	repeate_num = 0
 	while repeate_num < args.repeate_times:
 		gu.infoDump(f'Running {repeate_num} of {args.repeate_times}')
-		current_stats = gu.scrape_data()
-		gu.updateLogFile(args.log_file,current_stats)
-
+		try:
+			current_stats = gu.scrape_data()
+			gu.updateLogFile(args.log_file,current_stats)
+		except:
+			gu.infoDump(f'Failed this iter, probably could not find the file',0)
 		gu.infoDump(f'Waiting for {args.wait_delay} sec',0)
 		
 		time.sleep(args.wait_delay)
