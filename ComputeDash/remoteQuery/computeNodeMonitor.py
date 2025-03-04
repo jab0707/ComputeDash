@@ -60,6 +60,12 @@ class node:
 		gu.infoDump('Config set',1)
 
 	@check_for_config
+	def execute_command(self,command):
+		output = shu.execute_remote_command(self.ssh_client,command)
+			
+		return output
+
+	@check_for_config
 	def remove_remote_log_file(self):
 		output = 0
 		if shu.execute_remote_command(self.ssh_client,f'ls {self.remoteLogFile}') == 0:#check if it exists first
