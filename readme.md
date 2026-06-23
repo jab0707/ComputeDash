@@ -1,6 +1,9 @@
+# Overview
 ComputeDash
-A tool for querying compute node usage statistics
+A tool for querying compute node usage statistics.
+This was mostly a for fun project to work through the polling and remote monitoring tasks. Graphana handles all of this much better than anything this repo has. Why are you here? Do use graphana or something fully developed instead.
 
+# Working example
 Current working example:
 first download this repo both locally and in a centralized location accessible to all compute nodes that you plan to run it on
 
